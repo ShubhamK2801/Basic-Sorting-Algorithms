@@ -1,0 +1,334 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<time.h>//time calucating library
+void menu();//menu function prototype
+void INSERTION_SORT(int *,int);//sort function prototype
+void BUBBLE_SORT(int *,int );//sort function prototype
+void SELECTION_SORT(int *,int );//sort function prototype
+void SHELL_SORT(int *,int );//sort function prototype
+void print_arr(int *,long int );//print function prototype
+void random_arr(int *,long int);//array creation function prototype
+void ascending_arr(int *,long int);//array creation function prototype
+void descending_arr(int *,long int);//array creation function prototype
+void partial_arr(int *,long int);//array creation function prototype
+void copy(int *,int *,long int);//copy function prototype
+int main()
+{
+ menu();//menu function call
+ return 0;
+}
+void menu()
+{
+ int i,c,c1,m_choice=0;//i is loop counter,c is switch variable,m_choice is
+menu choice variable
+ long int length;//array length variable
+ clock_t start,end;
+ char check;
+double time_taken;
+ printf("\nEnter the Range of Elements[In Multiples of 100?]:-");
+ scanf("%ld",&length);
+ int a[length],b[length];//array creation
+ do
+ {
+ /********Array Creation Choice********/
+ printf("\n********Array Choice********\n");
+ printf("\n1.Random\n2.Ascending\n3.Descending\n4.Partially
+Sorted\n5.EXIT\nEnter The Choice:-");
+ scanf("%d",&c);
+ switch(c)
+ {
+ case 1:random_arr(a,length);
+ break;
+ case 2:ascending_arr(a,length);
+ break;
+ case 3:descending_arr(a,length);
+ break;
+ case 4:partial_arr(a,length);
+ break;
+ }
+ if(c!=5)
+ {
+ do
+ {
+ printf("\n********MENU********\n\t1.Sort Check\n\t2.Sort Time
+Analysis\n\t3.EXIT\nEnter The Choice:-");
+ scanf("%d",&m_choice);
+ switch(m_choice)////switch for Menu
+ {
+ case 1:do
+ {
+ printf("\n\n********Welcome To Sorting
+Menu********\n\n");
+ printf("\n1.INSERTION SORT\t2.BUBBLE
+SORT\n3.SELECTION SORT\t4.SHELL SORT\n5.EXIT");
+ printf("\nEnter Your Choice:-");
+ scanf("%d",&c1);
+ if(length<=50)
+ {
+ printf("\n********Entered
+Arrays********\n");//printing entered array
+ print_arr(a,length);//print function call
+ }
+ switch(c1)
+ {
+ case 1: copy(a,b,length);
+ start=clock();
+INSERTION_SORT(b,length);
+end=clock();
+time_taken=((double)(end-start))/
+CLOCKS_PER_SEC;
+ if(length<=50)
+ {
+printf("\n********Sorted
+Array********\n");
+print_arr(b,length);
+}
+printf("\nTime Taken by Insertion
+Sort := %f Seconds",time_taken);
+break;
+ case 2: copy(a,b,length);
+ start=clock();
+BUBBLE_SORT(b,length);
+end=clock();
+time_taken=((double)(end-start))/
+CLOCKS_PER_SEC;
+ if(length<=50)
+ {
+printf("\n********Sorted
+Array********\n");
+print_arr(b,length);
+}
+printf("\nTime Taken by Bubble
+Sort := %f Seconds",time_taken);
+ break;
+ case 3: copy(a,b,length);
+ start=clock();
+SELECTION_SORT(b,length);
+end=clock();
+time_taken=((double)(end-start))/
+CLOCKS_PER_SEC;
+ if(length<=50)
+ {
+printf("\n********Sorted
+Array********\n");
+print_arr(b,length);
+}
+printf("\nTime Taken by Selection
+Sort := %f Seconds",time_taken);
+break;
+ case 4: copy(a,b,length);
+ start=clock();
+SHELL_SORT(b,length);
+end=clock();
+time_taken=((double)(end-start))/
+CLOCKS_PER_SEC;
+ if(length<=50)
+ {
+printf("\n********Sorted
+Array********\n");
+print_arr(b,length);
+}
+printf("\nTime Taken by Shell
+Sort := %f Seconds\n",time_taken);
+ break;
+ }
+ }while(c1!=5);
+ break;
+ case 2: printf("\n********Sort Time Analysis********\n");
+ copy(a,b,length);
+ start=clock();
+INSERTION_SORT(b,length);
+end=clock();
+time_taken=((double)(end-start))/CLOCKS_PER_SEC;
+printf("\nTime Taken by Insertion Sort := %f
+Seconds",time_taken);
+copy(a,b,length);
+start=clock();
+BUBBLE_SORT(b,length);
+end=clock();
+time_taken=((double)(end-start))/CLOCKS_PER_SEC;
+printf("\nTime Taken by Bubble Sort := %f
+Seconds",time_taken);
+copy(a,b,length);
+start=clock();
+SELECTION_SORT(b,length);
+end=clock();
+time_taken=((double)(end-start))/CLOCKS_PER_SEC;
+printf("\nTime Taken by Selection Sort := %f
+Seconds",time_taken);
+copy(a,b,length);
+start=clock();
+SHELL_SORT(b,length);
+end=clock();
+time_taken=((double)(end-start))/CLOCKS_PER_SEC;
+printf("\nTime Taken by Shell Sort := %f
+Seconds\n",time_taken);
+break;
+}
+}while(m_choice!=3);
+}
+}while(c!=5);
+}
+/***********Inserion Sort Program***********/
+void INSERTION_SORT(int a[],int size)
+{
+ int key,i,j;
+ for(j=1;j<size;j++)
+ {
+ key=a[j];
+ i=j-1;
+ while(i>=0 && a[i]>key)
+ {
+ a[i+1]=a[i];
+ i=i-1;
+ }
+ a[i+1]=key;
+ }
+}
+/***********Bubble Sot Program***********/
+void BUBBLE_SORT(int a[],int size)
+{
+ int i,temp,SWAP,j;
+ for(i=0;i<(size-1);i++)
+ {
+ SWAP= 0;
+ for(j=0;j<(size-i-1);j++)
+ {
+ if(a[j]>a[j+1])
+ {
+ temp=a[j];
+ a[j]=a[j+1];
+ a[j+1]=temp;
+ SWAP=
+1
+;
+ }
+ }
+ if(SWAP==
+0
+)
+ {
+ break
+;
+ }
+ } }
+/***********Selection Sort Program***********/
+void SELECTION_SORT(int a[],int size) {
+ int MIN_POS,i,j,temp;
+ for(i=
+0;i<size2;i++)
+ {
+ MIN_POS=i;
+ for(j=i+
+1;j<size;j++)
+ {
+ if(a[j]<a[MIN_POS])
+ {
+ MIN_POS=j;
+ }
+ }
+ if(MIN_POS!=i)
+ {
+ temp=a[i];
+ a[i]=a[MIN_POS];
+ a[MIN_POS]=temp;
+ }
+ }
+}
+/***********Shell Sort Program***********/
+void SHELL_SORT(int a[],int size) {
+ int GAP,i,key,j;
+ for(GAP=(size/
+2);GAP>
+0;GAP=(GAP/
+2))
+ {
+ for(i=GAP;i<size;i++)
+ {
+ key=a[i];
+ for(j=i;j>=GAP && a[j-GAP]>key;j=(j-GAP))
+ {
+ a[j]=a[j-GAP];
+ }
+ a[j]=key;
+ }
+ } }
+/***********Display Function***********/
+void print_arr(int a[],long int size) {
+ int i;
+ for(i=
+0;i<size;i++)
+ {
+ printf(
+"%4d ",a[i]);
+ } }
+/***********Random Array Creation***********/
+void random_arr(int a[],long int length) {
+ int i=
+0
+;
+ for(i=
+0;i<length;i++)
+ {
+a[i]=rand();
+ } }
+/***********Ascending Array Creation***********/
+void ascending_arr(int a[],long int length) {
+ int i=
+0
+;
+ long int m=(length/10);
+ for(i=
+0;i<length;i++)
+ {
+ a[i]=m+
+4
+;
+ m++;
+ } }
+/***********Descending Array Creation***********/
+void descending_arr(int a[],long int length) {
+ int i=
+0
+;
+ long int m=length;
+ for(i=
+0;i<length;i++)
+ {
+ a[i]=m;
+ m--;
+ } }
+/***********Partial Array Creation***********/
+void partial_arr(int a[],long int length) {
+ int i=
+0
+;
+ long int m=(length/10);
+ for(i=
+0;i<length;i++)
+ {
+ if(i%
+4==
+0
+)
+ {
+ a[i]=m+
+4
+;
+ }
+ else
+ {
+ a[i]=m;
+ }
+ m++;
+ } }
+/***********Copy Function***********/
+void copy(int a[],int b[],long int size) {
+int i;
+for(i=
+0;i<size;i++)
+{
+b[i]=a[i];
+}
+}
+/***********End of Program***********/
